@@ -13,12 +13,22 @@ function dragStart(e) {
     }, 0);
     console.log('drag starts...');
 }
+const boxes = document.querySelectorAll('.box');
+
+boxes.forEach(box => {
+    box.addEventListener('dragenter', dragEnter)
+    box.addEventListener('dragover', dragOver);
+    box.addEventListener('dragleave', dragLeave);
+    box.addEventListener('drop', drop);
+});
 
 function dragEnter(e) {
+    e.preventDefault();
     e.target.classList.add('drag-over');
 }
 
 function dragOver(e) {
+    e.preventDefault();
     e.target.classList.add('drag-over');
 }
 
@@ -28,5 +38,16 @@ function dragLeave(e) {
 
 function drop(e) {
     e.target.classList.remove('drag-over');
+
+    // get the draggable element
+    const id = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(id);
+
+    // add it to the drop target
+    this.appendChild(draggable);
+    e.preventDefault();
+
+    // display the draggable element
+    draggable.classList.remove('hide');
 
 }
