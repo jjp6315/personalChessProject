@@ -8,6 +8,9 @@ item.addEventListener('dragstart', dragStart);
 
 function dragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.id);
-    e.target.classList.add('hide');
+    setTimeout(() => {
+        e.target.classList.add('hide');
+    }, 0);
     console.log('drag starts...');
 }
+
